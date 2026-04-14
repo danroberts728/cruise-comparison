@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Greek Isles & Mediterranean Cruise Comparison!</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sand: #f5f0e8;
+    --parchment: #ede6d6;
+    --deep-sea: #1a3a4a;
+    --aegean: #2b5c74;
+    --seafoam: #5b9aaa;
+    --terracotta: #c4623a;
+    --gold: #c8983a;
+    --muted: #7a7060;
+    --ink: #2a2218;
+    --white: #fefcf8;
+    --border: #d8cfbe;
+    --success-bg: #e8f4e8;
+    --success-text: #2d6a2d;
+    --warn-bg: #faf0e0;
+    --warn-text: #8a5a00;
+    --danger-bg: #faecec;
+    --danger-text: #8a2a2a;
+  }
+
+  body {
+    font-family: 'Jost', sans-serif;
+    background: var(--sand);
+    color: var(--ink);
+    min-height: 100vh;
+    font-weight: 300;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* HEADER */
+  header {
+    background: var(--deep-sea);
+    color: var(--white);
+    padding: 3rem 2rem 2.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 20px,
+      rgba(255,255,255,0.015) 20px,
+      rgba(255,255,255,0.015) 40px
+    );
+  }
+  header .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--seafoam);
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    position: relative;
+  }
+  header h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    position: relative;
+    letter-spacing: 0.01em;
+  }
+  header h1 em {
+    font-style: italic;
+    color: #a8cad6;
+  }
+  header .subtitle {
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    margin-top: 0.75rem;
+    letter-spacing: 0.05em;
+    position: relative;
+  }
+
+  /* TABS */
+  .tab-bar {
+    background: var(--deep-sea);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .tab-btn {
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-family: 'Jost', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 1rem 1.75rem;
+    cursor: pointer;
+    position: relative;
+    transition: color 0.2s;
+  }
+  .tab-btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 50%; right: 50%;
+    height: 2px;
+    background: var(--gold);
+    transition: left 0.2s, right 0.2s;
+  }
+  .tab-btn:hover { color: rgba(255,255,255,0.8); }
+  .tab-btn.active { color: var(--white); }
+  .tab-btn.active::after { left: 0; right: 0; }
+
+  /* PANELS */
+  .panel { display: none; padding: 2.5rem 1.5rem; max-width: 1100px; margin: 0 auto; }
+  .panel.active { display: block; }
+
+  /* SECTION LABEL */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 500;
+    margin: 2rem 0 0.75rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* OPTION CARDS GRID */
+  .option-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 1.5rem;
+  }
+  @media (max-width: 750px) { .option-grid { grid-template-columns: 1fr; } }
+
+  .option-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+    position: relative;
+  }
+  .option-card.featured {
+    border-color: var(--aegean);
+    border-width: 2px;
+  }
+  .option-card.featured::before {
+    content: 'Most inclusive';
+    position: absolute;
+    top: -1px; right: 1rem;
+    background: var(--aegean);
+    color: white;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 0 0 4px 4px;
+  }
+
+  .option-badge {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.4rem;
+    display: block;
+  }
+  .option-ship {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--deep-sea);
+    line-height: 1.2;
+    margin-bottom: 2px;
+  }
+  .option-line {
+    font-size: 12px;
+    color: var(--muted);
+    margin-bottom: 0.75rem;
+  }
+  .option-meta {
+    font-size: 11px;
+    color: var(--seafoam);
+    letter-spacing: 0.05em;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.75rem;
+  }
+
+  .price-line {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 4px 0;
+    border-bottom: 1px dotted var(--border);
+    gap: 0.5rem;
+  }
+  .price-line:last-child { border-bottom: none; }
+  .price-line .lbl { color: var(--muted); flex: 1; }
+  .price-line .val { font-weight: 500; color: var(--ink); white-space: nowrap; }
+  .price-line .val.zero { color: var(--success-text); }
+
+  .total-line {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 0;
+    margin-top: 6px;
+    border-top: 1px solid var(--border);
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--deep-sea);
+  }
+
+  /* INCLUSION TABLE */
+  .incl-table {
+    width: 100%;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    border-collapse: collapse;
+    font-size: 13px;
+    overflow: hidden;
+  }
+  .incl-table th {
+    background: var(--parchment);
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    padding: 0.6rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+  }
+  .incl-table td {
+    padding: 0.55rem 1rem;
+    border-bottom: 1px solid var(--border);
+    vertical-align: middle;
+  }
+  .incl-table tr:last-child td { border-bottom: none; }
+  .incl-table tr:hover td { background: var(--sand); }
+
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 2px;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+  }
+  .tag.yes { background: var(--success-bg); color: var(--success-text); }
+  .tag.partial { background: var(--warn-bg); color: var(--warn-text); }
+  .tag.no { background: var(--danger-bg); color: var(--danger-text); }
+
+  /* PORTS */
+  .ports-intro {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+    font-style: italic;
+  }
+  .port-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+  @media (max-width: 600px) { .port-grid { grid-template-columns: 1fr; } }
+
+  .port-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.1rem 1.25rem;
+  }
+  .port-card.unique-3 { border-left: 3px solid var(--gold); }
+  .port-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: var(--deep-sea);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+  .which-badge {
+    font-size: 10px;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 400;
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .port-site {
+    font-size: 12.5px;
+    color: var(--muted);
+    padding: 2.5px 0 2.5px 14px;
+    position: relative;
+    line-height: 1.4;
+  }
+  .port-site::before {
+    content: '·';
+    position: absolute;
+    left: 3px;
+    color: var(--border);
+    font-size: 14px;
+    line-height: 1.2;
+  }
+  .port-highlight {
+    font-size: 12.5px;
+    color: var(--aegean);
+    padding: 2.5px 0 2.5px 14px;
+    position: relative;
+    line-height: 1.4;
+    margin-top: 2px;
+  }
+  .port-highlight::before {
+    content: '★';
+    position: absolute;
+    left: 0;
+    font-size: 10px;
+    line-height: 1.6;
+    color: var(--gold);
+  }
+
+  /* AMENITIES */
+  .amenity-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1.25rem; }
+  @media (max-width: 750px) { .amenity-grid { grid-template-columns: 1fr; } }
+
+  .amenity-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1.5rem;
+  }
+  .amenity-card.featured { border-color: var(--aegean); border-width: 2px; }
+
+  .vibe-box {
+    background: var(--parchment);
+    border-radius: 3px;
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+    line-height: 1.5;
+    border-left: 2px solid var(--gold);
+  }
+
+  .amenity-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12.5px;
+    padding: 5.5px 0;
+    border-bottom: 1px dotted var(--border);
+    gap: 0.5rem;
+  }
+  .amenity-row:last-child { border-bottom: none; }
+  .amenity-row .a-lbl { color: var(--ink); }
+  .amenity-row .a-val { color: var(--muted); font-size: 11.5px; text-align: right; }
+  .amenity-row .a-val.yes { color: var(--success-text); }
+  .amenity-row .a-val.no { color: var(--danger-text); }
+  .amenity-row .a-val.note { color: var(--warn-text); }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    font-size: 12px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+    margin-top: 3rem;
+    letter-spacing: 0.05em;
+  }
+</style>
+</head>
+<body>
+
+<!-- Load cruise data from external file -->
+<script src="data.js"></script>
+
+<header>
+  <p class="eyebrow">20th Anniversary · June–July 2027</p>
+  <h1>Greek Isles &amp; <em>Mediterranean</em><br>Cruise Comparison</h1>
+  <p class="subtitle">Prepared by Daniela Huska · Seabreeze and Sunshine Travels</p>
+</header>
+
+<div class="tab-bar">
+  <button class="tab-btn active" onclick="showTab('overview', this)">Overview &amp; Cost</button>
+  <button class="tab-btn" onclick="showTab('ports', this)">Ports</button>
+  <button class="tab-btn" onclick="showTab('amenities', this)">Ship Amenities</button>
+</div>
+
+<!-- ===== OVERVIEW PANEL ===== -->
+<div id="overview" class="panel active">
+
+  <p class="section-label">The three options</p>
+  <div class="option-grid" id="cruiseCardsContainer">
+    <!-- Cruise cards will be rendered here by app.js -->
+  </div>
+
+  <p class="section-label">What's included in the base fare</p>
+  <table class="incl-table">
+    <thead>
+      <tr>
+        <th>Feature</th>
+        <th>Odyssey of the Seas</th>
+        <th>Enchanted Princess</th>
+        <th>Allura (Oceania)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Specialty restaurants</td>
+        <td><span class="tag no">Extra charge</span></td>
+        <td><span class="tag partial">Some included</span></td>
+        <td><span class="tag yes">All included</span></td>
+      </tr>
+      <tr>
+        <td>Wi-Fi</td>
+        <td><span class="tag no">Extra charge</span></td>
+        <td><span class="tag partial">With package</span></td>
+        <td><span class="tag yes">Included</span></td>
+      </tr>
+      <tr>
+        <td>Gratuities</td>
+        <td><span class="tag no">Extra charge</span></td>
+        <td><span class="tag partial">With package</span></td>
+        <td><span class="tag yes">Included</span></td>
+      </tr>
+      <tr>
+        <td>Beverages</td>
+        <td><span class="tag no">Extra charge</span></td>
+        <td><span class="tag partial">With package</span></td>
+        <td><span class="tag partial">Wine &amp; beer at meals</span></td>
+      </tr>
+      <tr>
+        <td>Shore excursion credit</td>
+        <td><span class="tag no">No</span></td>
+        <td><span class="tag no">No</span></td>
+        <td><span class="tag yes">Yes (choice)</span></td>
+      </tr>
+      <tr>
+        <td>Specialty coffee</td>
+        <td><span class="tag no">Extra charge</span></td>
+        <td><span class="tag no">Extra charge</span></td>
+        <td><span class="tag yes">Included</span></td>
+      </tr>
+      <tr>
+        <td>Culinary classes</td>
+        <td><span class="tag partial">Some available</span></td>
+        <td><span class="tag no">Limited</span></td>
+        <td><span class="tag yes">Included (full centre)</span></td>
+      </tr>
+      <tr>
+        <td>Number of ports</td>
+        <td>5 ports</td>
+        <td>5 ports</td>
+        <td>8 ports</td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>
+
+<!-- ===== PORTS PANEL ===== -->
+<div id="ports" class="panel">
+
+  <p class="ports-intro">Historic sites listed first for each port, followed by dining/drinks and cultural highlights. Options 1 &amp; 2 share Santorini, Kusadasi, and Civitavecchia. Options 2 &amp; 3 share Katakolon and Salerno. Option 3 visits 8 ports including 5 exclusive to Oceania.</p>
+
+  <p class="section-label">Shared by all options</p>
+  <div class="port-grid">
+
+    <div class="port-card">
+      <div class="port-name">Civitavecchia / Rome, Italy <span class="which-badge">All options</span></div>
+      <div class="port-site">Roman harbor structures and Torre di Lazzaretto</div>
+      <div class="port-site">Terme Taurine (Roman baths from 1st century)</div>
+      <div class="port-site">Via Popilia connection to Rome</div>
+      <div class="port-site">Flavio al Velavevodetto (traditional Roman restaurant)</div>
+      <div class="port-highlight">Rome's Colosseum area street performers and artisan markets</div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-name">Santorini, Greece <span class="which-badge">All options</span></div>
+      <div class="port-site">Akrotiri archaeological site (preserved Minoan town)</div>
+      <div class="port-site">Skaros Rock medieval fortress ruins</div>
+      <div class="port-site">Museum of Prehistoric Thera</div>
+      <div class="port-site">Astra Café (restaurant with caldera views)</div>
+      <div class="port-highlight">Oia sunset viewing and local winery tours</div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-name">Kusadasi / Ephesus, Turkey <span class="which-badge">All options</span></div>
+      <div class="port-site">Ephesus ancient city (UNESCO World Heritage)</div>
+      <div class="port-site">Library of Celsus facade (nearly intact)</div>
+      <div class="port-site">Panionium Ionian League ruins</div>
+      <div class="port-site">Ozbas Kofte (highly rated kebab house)</div>
+      <div class="port-highlight">Traditional Turkish bazaar shopping experience</div>
+    </div>
+
+  </div>
+
+  <p class="section-label">Option 1 only — Odyssey of the Seas</p>
+  <div class="port-grid">
+    <div class="port-card">
+      <div class="port-name">Mykonos, Greece <span class="which-badge">Option 1 only</span></div>
+      <div class="port-site">Archaeological Museum of Mykonos</div>
+      <div class="port-site">Aegean Maritime Museum</div>
+      <div class="port-site">Lena's House (19th-century traditional residence)</div>
+      <div class="port-site">M-Eating (contemporary Greek cuisine)</div>
+      <div class="port-highlight">Little Venice waterfront district walking tour</div>
+    </div>
+  </div>
+
+  <p class="section-label">Options 2 and 3 — Enchanted Princess &amp; Allura</p>
+  <div class="port-grid">
+    <div class="port-card">
+      <div class="port-name">Katakolon / Olympia, Greece <span class="which-badge">Options 2 &amp; 3</span></div>
+      <div class="port-site">Ancient Olympia archaeological site</div>
+      <div class="port-site">Museum of Ancient Greek Technology</div>
+      <div class="port-site">Pontikokastro medieval castle ruins</div>
+      <div class="port-site">Taverna Olympia (traditional Greek taverna)</div>
+      <div class="port-highlight">Kalamata olive oil tasting and artisan shops</div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-name">Salerno, Italy <span class="which-badge">Options 2 &amp; 3</span></div>
+      <div class="port-site">Salerno Cathedral (11th century)</div>
+      <div class="port-site">Arechi Castle overlooking the Gulf</div>
+      <div class="port-site">Scuola Medica Salernitana ruins</div>
+      <div class="port-site">Cumpa Cosimo (traditional Campanian cuisine)</div>
+      <div class="port-highlight">Giardino della Minerva botanical garden</div>
+    </div>
+  </div>
+
+  <p class="section-label">Option 3 only — Allura (Oceania)</p>
+  <div class="port-grid">
+
+    <div class="port-card">
+      <div class="port-name">Piraeus / Athens, Greece <span class="which-badge">Option 3 only</span></div>
+      <div class="port-site">Archaeological Museum of Piraeus</div>
+      <div class="port-site">Temple of Aphrodite ruins</div>
+      <div class="port-site">Ancient Theatre of Zea</div>
+      <div class="port-site">Psareia at Mikrolimano (seafood taverns)</div>
+      <div class="port-highlight">Mikrolimano harbor district marina culture</div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-name">Milos, Greece <span class="which-badge">Option 3 only</span></div>
+      <div class="port-site">Phylakopi archaeological site</div>
+      <div class="port-site">Archaeological Museum of Milos</div>
+      <div class="port-site">Klima ancient harbor village</div>
+      <div class="port-site">Sirocco (traditional Greek taverna)</div>
+      <div class="port-highlight">Colorful volcanic beaches and geotourism</div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-name">Catania / Mt. Etna, Sicily <span class="which-badge">Option 3 only</span></div>
+      <div class="port-site">Greek-Roman Theatre (2nd-3rd century CE)</div>
+      <div class="port-site">Roman Amphitheatre</div>
+      <div class="port-site">Cattedrale di Catania</div>
+      <div class="port-site">I Tre Bicchieri (Sicilian cuisine and wine)</div>
+      <div class="port-highlight">Lively fruit and vegetable markets</div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-name">Valletta, Malta <span class="which-badge">Option 3 only</span></div>
+      <div class="port-site">St John's Co-Cathedral</div>
+      <div class="port-site">Grandmaster's Palace (1571-1574)</div>
+      <div class="port-site">Fort Saint Elmo</div>
+      <div class="port-site">Nenu the Artisan Baker (traditional Maltese cuisine)</div>
+      <div class="port-highlight">Mediterranean Conference Centre gardens</div>
+    </div>
+
+    <div class="port-card">
+      <div class="port-name">Palermo, Sicily <span class="which-badge">Option 3 only</span></div>
+      <div class="port-site">Palazzo dei Normanni with Cappella Palatina</div>
+      <div class="port-site">Palermo Cathedral (12th-18th century)</div>
+      <div class="port-site">San Giovanni degli Eremiti church</div>
+      <div class="port-site">Ballarò market restaurants (Sicilian street food)</div>
+      <div class="port-highlight">Teatro Massimo opera house</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ===== AMENITIES PANEL ===== -->
+<div id="amenities" class="panel">
+
+  <div class="amenity-grid">
+
+    <!-- RC -->
+    <div class="amenity-card">
+      <span class="option-badge">Option 1 · Royal Caribbean</span>
+      <div class="option-ship">Odyssey of the Seas</div>
+      <div class="option-line" style="margin-bottom:0.25rem">Large ship · ~4,900 guests</div>
+      <div class="option-meta">High-energy, entertainment-forward</div>
+
+      <p class="section-label" style="margin-top:0.5rem">Signature experiences</p>
+      <div class="amenity-row"><span class="a-lbl">North Star observation pod</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">iFLY skydiving simulator</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">FlowRider surf simulator</span><span class="a-val note">Fee applies</span></div>
+      <div class="amenity-row"><span class="a-lbl">SeaPlex (bumper cars, basketball)</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Two70 theatre shows</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Casino Royale</span><span class="a-val yes">✓</span></div>
+      <div class="amenity-row"><span class="a-lbl">Adults-only Solarium pool</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Rock climbing wall</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Specialty restaurants</span><span class="a-val no">8+ extra charge</span></div>
+      <div class="amenity-row"><span class="a-lbl">Bionic robotic bar</span><span class="a-val yes">✓</span></div>
+      <div class="amenity-row"><span class="a-lbl">Culinary / language classes</span><span class="a-val note">Select, fee</span></div>
+      <div class="amenity-row"><span class="a-lbl">Laser tag</span><span class="a-val yes">✓</span></div>
+
+      <div class="vibe-box">Ship-as-destination. Best if you want entertainment and activities on sea days alongside the history ashore. The most à la carte of the three — final cost depends heavily on what you add on.</div>
+    </div>
+
+    <!-- Princess -->
+    <div class="amenity-card">
+      <span class="option-badge">Option 2 · Princess Cruises</span>
+      <div class="option-ship">Enchanted Princess</div>
+      <div class="option-line" style="margin-bottom:0.25rem">Large ship · ~3,660 guests</div>
+      <div class="option-meta">Classic, polished, first-timer friendly</div>
+
+      <p class="section-label" style="margin-top:0.5rem">Signature experiences</p>
+      <div class="amenity-row"><span class="a-lbl">Movies Under the Stars</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Discovery at Sea partnership</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">The Voice of the Ocean show</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Phantom Bridge escape room</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">The Sanctuary (adults-only)</span><span class="a-val note">Extra charge</span></div>
+      <div class="amenity-row"><span class="a-lbl">Lotus Spa Enclave / Thermal</span><span class="a-val note">Extra charge</span></div>
+      <div class="amenity-row"><span class="a-lbl">Infinity Wakeview pool</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Specialty restaurants</span><span class="a-val no">5+ extra charge</span></div>
+      <div class="amenity-row"><span class="a-lbl">MedallionClass app (order anywhere)</span><span class="a-val yes">✓</span></div>
+      <div class="amenity-row"><span class="a-lbl">Live jazz venue (Take Five)</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Casino</span><span class="a-val yes">✓</span></div>
+      <div class="amenity-row"><span class="a-lbl">Culinary classes</span><span class="a-val no">Very limited</span></div>
+
+      <div class="vibe-box">The smoothest entry point for first-time cruisers. Polished and comfortable without being overwhelming. Princess Plus package makes costs more predictable than Royal Caribbean.</div>
+    </div>
+
+    <!-- Oceania -->
+    <div class="amenity-card featured">
+      <span class="option-badge">Option 3 · Oceania Cruises</span>
+      <div class="option-ship">Allura</div>
+      <div class="option-line" style="margin-bottom:0.25rem">Small ship · ~1,200 guests</div>
+      <div class="option-meta">Refined, destination-first, cuisine-focused</div>
+
+      <p class="section-label" style="margin-top:0.5rem">Signature experiences</p>
+      <div class="amenity-row"><span class="a-lbl">Full Culinary Centre (hands-on)</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Culinary Discovery shore tours</span><span class="a-val yes">✓</span></div>
+      <div class="amenity-row"><span class="a-lbl">Artist Loft</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Guest lecture series</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">LYNC Digital Centre</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Aquamar Spa Terrace</span><span class="a-val yes">✓</span></div>
+      <div class="amenity-row"><span class="a-lbl">Specialty restaurants (6 total)</span><span class="a-val yes">All included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Afternoon tea (daily)</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Macallan whisky experiences</span><span class="a-val yes">✓</span></div>
+      <div class="amenity-row"><span class="a-lbl">Pool deck with cabanas</span><span class="a-val yes">✓ Included</span></div>
+      <div class="amenity-row"><span class="a-lbl">Casino</span><span class="a-val yes">✓</span></div>
+      <div class="amenity-row"><span class="a-lbl">Thrill activities (skydiving etc.)</span><span class="a-val no">Not the focus</span></div>
+
+      <div class="vibe-box">Destination-first. Fewer guests, quieter evenings, exceptional included dining. Strongest match for history &amp; culture priorities. The higher fare is offset by what's already covered.</div>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  Proposal prepared by Daniela Huska · Seabreeze and Sunshine Travels · All prices approximate and subject to change
+</footer>
+
+<script src="js/app.js"></script>
+</body>
+</html>
