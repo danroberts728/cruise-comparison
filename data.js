@@ -45,6 +45,18 @@ window.cruiseData = {
       // Customer vibe / recommendation
       vibe: 'Ship-as-destination. Best if you want entertainment and activities on sea days alongside the history ashore. The most à la carte of the three — final cost depends heavily on what you add on.',
 
+      // Day-by-day port schedule (null = At Sea)
+      itinerary: [
+        { date: 'Jun 6',  port: 'Civitavecchia / Rome, Italy' },
+        { date: 'Jun 7',  port: null },
+        { date: 'Jun 8',  port: 'Naples, Italy' },
+        { date: 'Jun 9',  port: null },
+        { date: 'Jun 10', port: 'Santorini, Greece' },
+        { date: 'Jun 11', port: 'Kusadasi / Ephesus, Turkey' },
+        { date: 'Jun 12', port: 'Mykonos, Greece' },
+        { date: 'Jun 13', port: 'Civitavecchia / Rome, Italy' }
+      ],
+
       // Amenities and experiences on the ship
       experiences: [
         { name: 'North Star observation pod', status: 'included' },
@@ -86,6 +98,18 @@ window.cruiseData = {
         dining: 150,                      // ³ Specialty restaurant upcharges (not included in Plus package)
         total: 9374
       },
+
+      // Day-by-day port schedule (null = At Sea)
+      itinerary: [
+        { date: 'Jun 12', port: 'Civitavecchia / Rome, Italy' },
+        { date: 'Jun 13', port: 'Salerno, Italy' },
+        { date: 'Jun 14', port: 'Katakolon / Olympia, Greece' },
+        { date: 'Jun 15', port: null },
+        { date: 'Jun 16', port: 'Santorini, Greece' },
+        { date: 'Jun 17', port: 'Kusadasi / Ephesus, Turkey' },
+        { date: 'Jun 18', port: null },
+        { date: 'Jun 19', port: 'Civitavecchia / Rome, Italy' }
+      ],
 
       philosophy: 'Classic, polished, first-timer friendly',
       shipSize: 'Large ship · ~3,660 guests',
@@ -131,6 +155,18 @@ window.cruiseData = {
         dining: 0,
         total: 10348
       },
+
+      // Day-by-day port schedule (null = At Sea)
+      itinerary: [
+        { date: 'Jun 25', port: 'Piraeus / Athens, Greece' },
+        { date: 'Jun 26', port: 'Katakolon / Olympia, Greece' },
+        { date: 'Jun 27', port: 'Milos, Greece' },
+        { date: 'Jun 28', port: 'Valletta, Malta' },
+        { date: 'Jun 29', port: 'Catania / Mt. Etna, Sicily' },
+        { date: 'Jun 30', port: 'Palermo, Sicily' },
+        { date: 'Jul 1',  port: 'Salerno, Italy' },
+        { date: 'Jul 2',  port: 'Civitavecchia / Rome, Italy' }
+      ],
 
       philosophy: 'Refined, destination-first, cuisine-focused',
       shipSize: 'Small ship · ~1,200 guests',
@@ -196,9 +232,9 @@ window.cruiseData = {
       name: 'Civitavecchia / Rome, Italy',
       sharedBy: 'all',
       historicalSites: [
-        'Roman harbor structures and Torre di Lazzaretto',
-        'Terme Taurine (Roman baths from 1st century)',
-        'Via Popilia connection to Rome'
+        'Colosseum & Roman Forum (the ancient empire\'s civic and ceremonial heart)',
+        'Vatican Museums, Sistine Chapel & St. Peter\'s Basilica',
+        'Pantheon, Trevi Fountain & Piazza Navona'
       ],
       diningVenue: 'Flavio al Velavevodetto (traditional Roman restaurant)',
       highlight: 'Rome\'s Colosseum area street performers and artisan markets'
@@ -207,9 +243,9 @@ window.cruiseData = {
       name: 'Santorini, Greece',
       sharedBy: '1,2',
       historicalSites: [
-        'Akrotiri archaeological site (preserved Minoan town)',
-        'Skaros Rock medieval fortress ruins',
-        'Museum of Prehistoric Thera'
+        'Akrotiri Bronze Age site (UNESCO-listed buried Minoan town)',
+        'Oia village — iconic blue-domed churches and caldera panorama',
+        'Ancient Thera ruins on Mesa Vouno (Hellenistic & Roman remains)'
       ],
       diningVenue: 'Astra Café (restaurant with caldera views)',
       highlight: 'Oia sunset viewing and local winery tours'
@@ -218,9 +254,9 @@ window.cruiseData = {
       name: 'Kusadasi / Ephesus, Turkey',
       sharedBy: '1,2',
       historicalSites: [
-        'Ephesus ancient city (UNESCO World Heritage)',
-        'Library of Celsus facade (nearly intact)',
-        'Panionium Ionian League ruins'
+        'Ephesus ancient city — Great Theatre, Curetes Street & Terrace Houses (UNESCO)',
+        'Library of Celsus facade (2nd-century CE, one of the best-preserved in the world)',
+        'House of the Virgin Mary (Meryem Ana Evi — major Catholic pilgrimage site)'
       ],
       diningVenue: 'Ozbas Kofte (highly rated kebab house)',
       highlight: 'Traditional Turkish bazaar shopping experience'
@@ -229,12 +265,12 @@ window.cruiseData = {
       name: 'Naples, Italy',
       sharedBy: '1',
       historicalSites: [
-        'Royal Palace of Naples',
-        'National Archaeological Museum',
-        'Castel Nuovo (13th century fortress)'
+        'Pompeii archaeological site (Roman city preserved by Vesuvius, UNESCO)',
+        'Herculaneum (smaller, better-preserved companion site to Pompeii)',
+        'National Archaeological Museum (world\'s finest collection of Pompeii artifacts)'
       ],
       diningVenue: 'L\'Ebbrezza di Noè (traditional Neapolitan cuisine)',
-      highlight: 'Gateway to Pompeii & Mount Vesuvius archaeological sites'
+      highlight: 'Spaccanapoli street & the birthplace of Neapolitan pizza'
     },
 
     // --- PORTS in OPTIONS 2 & 3 only ---
@@ -242,9 +278,9 @@ window.cruiseData = {
       name: 'Katakolon / Olympia, Greece',
       sharedBy: '2,3',
       historicalSites: [
-        'Ancient Olympia archaeological site',
-        'Museum of Ancient Greek Technology',
-        'Pontikokastro medieval castle ruins'
+        'Ancient Olympia — Temple of Zeus, Altis sanctuary & original athlete\'s stadium',
+        'Archaeological Museum of Olympia (Hermes by Praxiteles, Nike of Paeonius)',
+        'Museum of Ancient Greek Technology (working models of ancient innovations)'
       ],
       diningVenue: 'Taverna Olympia (traditional Greek taverna)',
       highlight: 'Kalamata olive oil tasting and artisan shops'
@@ -253,9 +289,9 @@ window.cruiseData = {
       name: 'Salerno, Italy',
       sharedBy: '2,3',
       historicalSites: [
-        'Salerno Cathedral (11th century)',
-        'Arechi Castle overlooking the Gulf',
-        'Scuola Medica Salernitana ruins'
+        'Salerno Cathedral — Norman nave & crypt of St. Matthew (11th century)',
+        'Arechi Castle (Lombard fortress with panoramic Gulf of Salerno views)',
+        'Amalfi Coast — Positano, Amalfi & Ravello (30–60 min from port)'
       ],
       diningVenue: 'Cumpa Cosimo (traditional Campanian cuisine)',
       highlight: 'Giardino della Minerva botanical garden'
@@ -266,12 +302,12 @@ window.cruiseData = {
       name: 'Mykonos, Greece',
       sharedBy: '1',
       historicalSites: [
-        'Archaeological Museum of Mykonos',
-        'Aegean Maritime Museum',
-        'Lena\'s House (19th-century traditional residence)'
+        'Delos Island (UNESCO — birthplace of Apollo, entire island is an archaeological site)',
+        'Mykonos windmills & Little Venice waterfront',
+        'Paraportiani Church (iconic whitewashed Cycladic architecture)'
       ],
       diningVenue: 'M-Eating (contemporary Greek cuisine)',
-      highlight: 'Little Venice waterfront district walking tour'
+      highlight: 'Sunset aperitif along the Little Venice waterfront'
     },
 
     // --- OPTIONS 3 ONLY (EXCLUSIVE TO ALLURA) ---
@@ -279,31 +315,31 @@ window.cruiseData = {
       name: 'Piraeus / Athens, Greece',
       sharedBy: '3',
       historicalSites: [
-        'Archaeological Museum of Piraeus',
-        'Temple of Aphrodite ruins',
-        'Ancient Theatre of Zea'
+        'Acropolis Hill — Parthenon, Erechtheion & Propylaea (UNESCO)',
+        'Acropolis Museum (world-class collection of classical Greek sculpture)',
+        'Ancient Agora of Athens & Temple of Hephaestus'
       ],
       diningVenue: 'Psareia at Mikrolimano (seafood taverns)',
-      highlight: 'Mikrolimano harbor district marina culture'
+      highlight: 'Plaka neighborhood walk below the Acropolis — tavernas, shops & Byzantine churches'
     },
     {
       name: 'Milos, Greece',
       sharedBy: '3',
       historicalSites: [
-        'Phylakopi archaeological site',
-        'Archaeological Museum of Milos',
-        'Klima ancient harbor village'
+        'Sarakiniko beach (white volcanic lunar landscape — most photographed spot in Milos)',
+        'Catacombs of Milos (only early Christian catacombs in Greece, 1st century CE)',
+        'Klima village — colorful syrmata boathouses carved into volcanic rock'
       ],
       diningVenue: 'Sirocco (traditional Greek taverna)',
-      highlight: 'Colorful volcanic beaches and geotourism'
+      highlight: 'Boat tour of sea caves, geothermal springs & secluded volcanic coves'
     },
     {
       name: 'Catania / Mt. Etna, Sicily',
       sharedBy: '3',
       historicalSites: [
-        'Greek-Roman Theatre (2nd-3rd century CE)',
-        'Roman Amphitheatre',
-        'Cattedrale di Catania'
+        'Mount Etna — cable car & crater hike on Europe\'s most active volcano (UNESCO)',
+        'Catania Cathedral & Piazza del Duomo (baroque Elephant Fountain)',
+        'Greek-Roman Theatre of Catania (still used for summer performances)'
       ],
       diningVenue: 'I Tre Bicchieri (Sicilian cuisine and wine)',
       highlight: 'Lively fruit and vegetable markets'
@@ -312,9 +348,9 @@ window.cruiseData = {
       name: 'Valletta, Malta',
       sharedBy: '3',
       historicalSites: [
-        'St John\'s Co-Cathedral',
-        'Grandmaster\'s Palace (1571-1574)',
-        'Fort Saint Elmo'
+        'St John\'s Co-Cathedral (Caravaggio\'s The Beheading of St John, ornate chapels)',
+        'Upper Barrakka Gardens & Saluting Battery (panoramic Grand Harbour views)',
+        'Grandmaster\'s Palace & State Rooms (history of the Knights of St John)'
       ],
       diningVenue: 'Nenu the Artisan Baker (traditional Maltese cuisine)',
       highlight: 'Mediterranean Conference Centre gardens'
@@ -323,9 +359,9 @@ window.cruiseData = {
       name: 'Palermo, Sicily',
       sharedBy: '3',
       historicalSites: [
-        'Palazzo dei Normanni with Cappella Palatina',
-        'Palermo Cathedral (12th-18th century)',
-        'San Giovanni degli Eremiti church'
+        'Palazzo dei Normanni & Cappella Palatina (UNESCO, stunning Byzantine mosaics)',
+        'Monreale Cathedral (UNESCO — finest Norman-Byzantine mosaics in the world, 5 km from port)',
+        'Palermo Cathedral (12th-century Norman exterior with royal tombs)'
       ],
       diningVenue: 'Ballarò market restaurants (Sicilian street food)',
       highlight: 'Teatro Massimo opera house'

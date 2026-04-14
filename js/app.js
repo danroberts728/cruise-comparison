@@ -129,5 +129,75 @@ function getAmeniityStatus(status) {
   return '<span class="a-val yes">✓</span>';
 }
 
+/**
+ * Render the ports tab as a day-by-day itinerary grid (3 cruise columns × 8 day rows)
+ */
+function renderPortCards() {
+  const container = document.getElementById('portsContainer');
+
+  if (!container || !window.cruiseData) {
+    console.error('Missing container or cruiseData');
+    return;
+  }
+
+  const { cruises, ports } = window.cruiseData;
+
+  // Build a lookup map from port name → port data
+  const portMap = {};
+  ports.forEach(p => { portMap[p.name] = p; });
+
+  const badgeLabels = {
+    'all':  'All options',
+    '1,2':  'Options 1 &amp; 2',
+    '1':    'Option 1 only',
+    '2':    'Option 2 only',
+    '2,3':  'Options 2 &amp; 3',
+    '3':    'Option 3 only'
+  };
+
+  function portCellHtml(dayEntry) {
+    if (!dayEntry || !dayEntry.port) {
+      return `<div class="at-sea-card"><div class="itin-cell-date">${dayEntry.date}</div><span class="at-sea-text">At Sea</span></div>`;
+    }
+    const port = portMap[dayEntry.port];
+    if (!port) {
+      return `<div class="port-card"><div class="port-name">${dayEntry.port}</div></div>`;
+    }
+    const badge = badgeLabels[port.sharedBy] || port.sharedBy;
+    const sitesHtml = port.historicalSites
+      .map(s => `<div class="port-site">${s}</div>`)
+      .join('');
+    return `
+      <div class="port-card">
+        <div class="itin-cell-date">${dayEntry.date}</div>
+        <div class="port-name">${port.name} <span class="which-badge">${badge}</span></div>
+        ${sitesHtml}
+        <div class="port-dining"><span class="port-row-label">Dining</span>${port.diningVenue}</div>
+        <div class="port-highlight"><span class="port-row-label">Highlight</span>${port.highlight}</div>
+      </div>`;
+  }
+
+  // Column headers (one per cruise option)
+  const headerHtml = `<div class="itin-spacer"></div>` + cruises.map(c => `
+    <div class="itin-col-header">
+      <span class="option-badge">Option ${c.id} &middot; ${c.company}</span>
+      <div class="itin-ship">${c.ship}</div>
+      <div class="itin-dates">${c.dates}</div>
+    </div>`).join('');
+
+  // Day rows
+  const numDays = cruises[0].itinerary.length;
+  let rowsHtml = '';
+  for (let i = 0; i < numDays; i++) {
+    rowsHtml += `<div class="itin-day-label"><span class="itin-day-num">Day ${i + 1}</span></div>`;
+    for (const cruise of cruises) {
+      rowsHtml += portCellHtml(cruise.itinerary[i]);
+    }
+  }
+
+  container.innerHTML = `<div class="itinerary-grid">${headerHtml}${rowsHtml}</div>`;
+}
+
 // Initialize immediately since script is at bottom of page
 renderCruiseCards();
+renderPortCards();

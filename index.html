@@ -325,21 +325,103 @@
     font-size: 14px;
     line-height: 1.2;
   }
+  .port-row-label {
+    font-size: 9px;
+    font-family: 'Jost', sans-serif;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 500;
+    margin-right: 5px;
+  }
+  .port-dining {
+    font-size: 12.5px;
+    color: var(--ink);
+    padding: 8px 0 2.5px 0;
+    line-height: 1.4;
+    border-top: 1px solid var(--border);
+    margin-top: 8px;
+  }
+  .port-dining .port-row-label { color: var(--terracotta); }
   .port-highlight {
     font-size: 12.5px;
     color: var(--aegean);
-    padding: 2.5px 0 2.5px 14px;
-    position: relative;
+    padding: 3px 0 2.5px 0;
     line-height: 1.4;
     margin-top: 2px;
   }
-  .port-highlight::before {
-    content: '★';
-    position: absolute;
-    left: 0;
+  .port-highlight .port-row-label { color: var(--gold); }
+
+  /* ITINERARY GRID */
+  .itinerary-grid {
+    display: grid;
+    grid-template-columns: 4rem repeat(3, minmax(0, 1fr));
+    gap: 0.6rem 0.75rem;
+  }
+  @media (max-width: 750px) {
+    .itinerary-grid { grid-template-columns: 2.5rem repeat(3, minmax(0, 1fr)); gap: 0.4rem; }
+  }
+  .itin-col-header {
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.1rem;
+  }
+  .itin-ship {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--deep-sea);
+    margin-top: 3px;
+    line-height: 1.2;
+  }
+  .itin-dates {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .itin-day-label {
+    display: flex;
+    align-items: flex-start;
+    padding-top: 0.9rem;
+  }
+  .itin-day-num {
     font-size: 10px;
-    line-height: 1.6;
-    color: var(--gold);
+    font-family: 'Jost', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 500;
+    white-space: nowrap;
+  }
+  .itin-cell-date {
+    font-size: 10px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 5px;
+  }
+  .at-sea-card {
+    background: rgba(43, 92, 116, 0.05);
+    border: 1px solid rgba(91, 154, 170, 0.35);
+    border-radius: 4px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+  }
+  .at-sea-card .itin-cell-date {
+    color: rgba(91, 154, 170, 0.65);
+  }
+  .at-sea-text {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--seafoam);
+    font-weight: 400;
+  }
+  .at-sea-text::before {
+    content: '\2248\00a0\00a0';
   }
 
   /* AMENITIES */
@@ -487,120 +569,7 @@
 
   <p class="ports-intro">Historic sites listed first for each port, followed by dining/drinks and cultural highlights. Options 1 &amp; 2 share Santorini, Kusadasi, and Civitavecchia. Options 2 &amp; 3 share Katakolon and Salerno. Option 3 visits 8 ports including 5 exclusive to Oceania.</p>
 
-  <p class="section-label">Shared by all options</p>
-  <div class="port-grid">
-
-    <div class="port-card">
-      <div class="port-name">Civitavecchia / Rome, Italy <span class="which-badge">All options</span></div>
-      <div class="port-site">Roman harbor structures and Torre di Lazzaretto</div>
-      <div class="port-site">Terme Taurine (Roman baths from 1st century)</div>
-      <div class="port-site">Via Popilia connection to Rome</div>
-      <div class="port-site">Flavio al Velavevodetto (traditional Roman restaurant)</div>
-      <div class="port-highlight">Rome's Colosseum area street performers and artisan markets</div>
-    </div>
-
-    <div class="port-card">
-      <div class="port-name">Santorini, Greece <span class="which-badge">All options</span></div>
-      <div class="port-site">Akrotiri archaeological site (preserved Minoan town)</div>
-      <div class="port-site">Skaros Rock medieval fortress ruins</div>
-      <div class="port-site">Museum of Prehistoric Thera</div>
-      <div class="port-site">Astra Café (restaurant with caldera views)</div>
-      <div class="port-highlight">Oia sunset viewing and local winery tours</div>
-    </div>
-
-    <div class="port-card">
-      <div class="port-name">Kusadasi / Ephesus, Turkey <span class="which-badge">All options</span></div>
-      <div class="port-site">Ephesus ancient city (UNESCO World Heritage)</div>
-      <div class="port-site">Library of Celsus facade (nearly intact)</div>
-      <div class="port-site">Panionium Ionian League ruins</div>
-      <div class="port-site">Ozbas Kofte (highly rated kebab house)</div>
-      <div class="port-highlight">Traditional Turkish bazaar shopping experience</div>
-    </div>
-
-  </div>
-
-  <p class="section-label">Option 1 only — Odyssey of the Seas</p>
-  <div class="port-grid">
-    <div class="port-card">
-      <div class="port-name">Mykonos, Greece <span class="which-badge">Option 1 only</span></div>
-      <div class="port-site">Archaeological Museum of Mykonos</div>
-      <div class="port-site">Aegean Maritime Museum</div>
-      <div class="port-site">Lena's House (19th-century traditional residence)</div>
-      <div class="port-site">M-Eating (contemporary Greek cuisine)</div>
-      <div class="port-highlight">Little Venice waterfront district walking tour</div>
-    </div>
-  </div>
-
-  <p class="section-label">Options 2 and 3 — Enchanted Princess &amp; Allura</p>
-  <div class="port-grid">
-    <div class="port-card">
-      <div class="port-name">Katakolon / Olympia, Greece <span class="which-badge">Options 2 &amp; 3</span></div>
-      <div class="port-site">Ancient Olympia archaeological site</div>
-      <div class="port-site">Museum of Ancient Greek Technology</div>
-      <div class="port-site">Pontikokastro medieval castle ruins</div>
-      <div class="port-site">Taverna Olympia (traditional Greek taverna)</div>
-      <div class="port-highlight">Kalamata olive oil tasting and artisan shops</div>
-    </div>
-
-    <div class="port-card">
-      <div class="port-name">Salerno, Italy <span class="which-badge">Options 2 &amp; 3</span></div>
-      <div class="port-site">Salerno Cathedral (11th century)</div>
-      <div class="port-site">Arechi Castle overlooking the Gulf</div>
-      <div class="port-site">Scuola Medica Salernitana ruins</div>
-      <div class="port-site">Cumpa Cosimo (traditional Campanian cuisine)</div>
-      <div class="port-highlight">Giardino della Minerva botanical garden</div>
-    </div>
-  </div>
-
-  <p class="section-label">Option 3 only — Allura (Oceania)</p>
-  <div class="port-grid">
-
-    <div class="port-card">
-      <div class="port-name">Piraeus / Athens, Greece <span class="which-badge">Option 3 only</span></div>
-      <div class="port-site">Archaeological Museum of Piraeus</div>
-      <div class="port-site">Temple of Aphrodite ruins</div>
-      <div class="port-site">Ancient Theatre of Zea</div>
-      <div class="port-site">Psareia at Mikrolimano (seafood taverns)</div>
-      <div class="port-highlight">Mikrolimano harbor district marina culture</div>
-    </div>
-
-    <div class="port-card">
-      <div class="port-name">Milos, Greece <span class="which-badge">Option 3 only</span></div>
-      <div class="port-site">Phylakopi archaeological site</div>
-      <div class="port-site">Archaeological Museum of Milos</div>
-      <div class="port-site">Klima ancient harbor village</div>
-      <div class="port-site">Sirocco (traditional Greek taverna)</div>
-      <div class="port-highlight">Colorful volcanic beaches and geotourism</div>
-    </div>
-
-    <div class="port-card">
-      <div class="port-name">Catania / Mt. Etna, Sicily <span class="which-badge">Option 3 only</span></div>
-      <div class="port-site">Greek-Roman Theatre (2nd-3rd century CE)</div>
-      <div class="port-site">Roman Amphitheatre</div>
-      <div class="port-site">Cattedrale di Catania</div>
-      <div class="port-site">I Tre Bicchieri (Sicilian cuisine and wine)</div>
-      <div class="port-highlight">Lively fruit and vegetable markets</div>
-    </div>
-
-    <div class="port-card">
-      <div class="port-name">Valletta, Malta <span class="which-badge">Option 3 only</span></div>
-      <div class="port-site">St John's Co-Cathedral</div>
-      <div class="port-site">Grandmaster's Palace (1571-1574)</div>
-      <div class="port-site">Fort Saint Elmo</div>
-      <div class="port-site">Nenu the Artisan Baker (traditional Maltese cuisine)</div>
-      <div class="port-highlight">Mediterranean Conference Centre gardens</div>
-    </div>
-
-    <div class="port-card">
-      <div class="port-name">Palermo, Sicily <span class="which-badge">Option 3 only</span></div>
-      <div class="port-site">Palazzo dei Normanni with Cappella Palatina</div>
-      <div class="port-site">Palermo Cathedral (12th-18th century)</div>
-      <div class="port-site">San Giovanni degli Eremiti church</div>
-      <div class="port-site">Ballarò market restaurants (Sicilian street food)</div>
-      <div class="port-highlight">Teatro Massimo opera house</div>
-    </div>
-
-  </div>
+  <div id="portsContainer"></div>
 </div>
 
 <!-- ===== AMENITIES PANEL ===== -->
