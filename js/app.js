@@ -155,13 +155,14 @@ function renderPortCards() {
     '3':    'Option 3 only'
   };
 
-  function portCellHtml(dayEntry) {
+  function portCellHtml(dayEntry, cruise) {
+    const cruiseLabel = `<div class="itin-cruise-label">Option ${cruise.id} &middot; ${cruise.ship}</div>`;
     if (!dayEntry || !dayEntry.port) {
-      return `<div class="at-sea-card"><div class="itin-cell-date">${dayEntry.date}</div><span class="at-sea-text">At Sea</span></div>`;
+      return `<div class="at-sea-card">${cruiseLabel}<div class="itin-cell-date">${dayEntry.date}</div><span class="at-sea-text">At Sea</span></div>`;
     }
     const port = portMap[dayEntry.port];
     if (!port) {
-      return `<div class="port-card"><div class="port-name">${dayEntry.port}</div></div>`;
+      return `<div class="port-card">${cruiseLabel}<div class="port-name">${dayEntry.port}</div></div>`;
     }
     const badge = badgeLabels[port.sharedBy] || port.sharedBy;
     const sitesHtml = port.historicalSites
@@ -169,6 +170,7 @@ function renderPortCards() {
       .join('');
     return `
       <div class="port-card">
+        ${cruiseLabel}
         <div class="itin-cell-date">${dayEntry.date}</div>
         <div class="port-name">${port.name} <span class="which-badge">${badge}</span></div>
         ${sitesHtml}
@@ -178,21 +180,22 @@ function renderPortCards() {
   }
 
   // Column headers (one per cruise option)
-  const headerHtml = `<div class="itin-spacer"></div>` + cruises.map(c => `
+  const headerHtml = `<div class="itin-header-row"><div class="itin-spacer"></div>` + cruises.map(c => `
     <div class="itin-col-header">
       <span class="option-badge">Option ${c.id} &middot; ${c.company}</span>
       <div class="itin-ship">${c.ship}</div>
       <div class="itin-dates">${c.dates}</div>
-    </div>`).join('');
+    </div>`).join('') + `</div>`;
 
   // Day rows
   const numDays = cruises[0].itinerary.length;
   let rowsHtml = '';
   for (let i = 0; i < numDays; i++) {
-    rowsHtml += `<div class="itin-day-label"><span class="itin-day-num">Day ${i + 1}</span></div>`;
+    rowsHtml += `<div class="itin-row"><div class="itin-day-label"><span class="itin-day-num">Day ${i + 1}</span></div>`;
     for (const cruise of cruises) {
-      rowsHtml += portCellHtml(cruise.itinerary[i]);
+      rowsHtml += portCellHtml(cruise.itinerary[i], cruise);
     }
+    rowsHtml += `</div>`;
   }
 
   container.innerHTML = `<div class="itinerary-grid">${headerHtml}${rowsHtml}</div>`;

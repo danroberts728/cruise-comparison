@@ -357,8 +357,32 @@
     grid-template-columns: 4rem repeat(3, minmax(0, 1fr));
     gap: 0.6rem 0.75rem;
   }
+  .itin-header-row, .itin-row { display: contents; }
+  .itin-cruise-label { display: none; }
   @media (max-width: 750px) {
-    .itinerary-grid { grid-template-columns: 2.5rem repeat(3, minmax(0, 1fr)); gap: 0.4rem; }
+    .itinerary-grid { display: block; }
+    .itin-header-row { display: none; }
+    .itin-row {
+      display: block;
+      margin-bottom: 1.5rem;
+    }
+    .itin-day-label {
+      padding: 0.4rem 0 0.5rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0.5rem;
+    }
+    .itin-day-label .itin-day-num { font-size: 11px; }
+    .itin-row .port-card, .itin-row .at-sea-card { margin-bottom: 0.5rem; }
+    .itin-cruise-label {
+      display: block;
+      font-size: 10px;
+      font-family: 'Jost', sans-serif;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      font-weight: 500;
+      margin-bottom: 5px;
+    }
   }
   .itin-col-header {
     padding-bottom: 0.6rem;
